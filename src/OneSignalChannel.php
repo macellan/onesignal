@@ -39,8 +39,6 @@ class OneSignalChannel
             return null;
         }
 
-        $userIds = is_array($userIds) ? $userIds : [$userIds];
-
         $result = Http::timeout($this->timeout)
             ->asJson()->acceptJson()
             ->post(self::ENDPOINT, [
@@ -48,7 +46,7 @@ class OneSignalChannel
                 'contents' => $message->getBody(),
                 'headings' => $message->getHeadings(),
                 'data' => $message->getData(),
-                'include_player_ids' => $userIds,
+                'include_player_ids' => is_array($userIds) ? $userIds : [$userIds],
             ]);
 
         if ($requestException = $result->toException()) {
