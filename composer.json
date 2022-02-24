@@ -1,0 +1,36 @@
+{
+  "name": "macellan/onesignal",
+  "description": "OneSignal notifications channel for Laravel",
+  "homepage": "http://macellan.net/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fatih Aytekin",
+      "email": "fatih@aytekin.me",
+      "homepage": "https://github.com/faytekin",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "illuminate/notifications": "^8.0 || ^9.0",
+    "illuminate/support": "^8.0 || ^9.0",
+    "illuminate/http": "^8.0 || ^9.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Macellan\\OneSignal\\": "src"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Macellan\\OneSignal\\OneSignalServiceProvider"
+      ]
+    }
+  }
+}
