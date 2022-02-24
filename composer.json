@@ -13,18 +13,32 @@
   ],
   "require": {
     "php": ">=7.4",
+    "guzzlehttp/guzzle": "^7.2|^7.0.1",
     "illuminate/notifications": "^8.0 || ^9.0",
     "illuminate/support": "^8.0 || ^9.0",
     "illuminate/http": "^8.0 || ^9.0",
     "ext-json": "*"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^7.1",
+    "mockery/mockery": "^1.4.4",
+    "phpunit/phpunit": "^9.5.10",
+    "squizlabs/php_codesniffer": "^3.6"
   },
   "autoload": {
     "psr-4": {
       "Macellan\\OneSignal\\": "src"
     }
   },
-  "config": {
-    "sort-packages": true
+  "autoload-dev": {
+    "psr-4": {
+      "Macellan\\OneSignal\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+    "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
   },
   "extra": {
     "laravel": {
@@ -32,5 +46,10 @@
         "Macellan\\OneSignal\\OneSignalServiceProvider"
       ]
     }
-  }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

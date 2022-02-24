@@ -10,14 +10,13 @@ class OneSignalChannel
 {
     protected string $appId;
 
-    protected string $endPoint;
-
     protected int $timeout = 3;
+
+    const ENDPOINT = 'https://onesignal.com/api/v1/notifications';
 
     public function __construct(string $appId)
     {
         $this->appId = $appId;
-        $this->endPoint = 'https://onesignal.com/api/v1/notifications';
     }
 
     /**
@@ -27,8 +26,7 @@ class OneSignalChannel
      * @param Notification $notification
      *
      * @return object|null
-     * @throws CouldNotSendNotification
-     * @noinspection PhpUndefinedMethodInspection
+     * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException
      */
     public function send($notifiable, Notification $notification): ?object
     {
@@ -45,7 +43,7 @@ class OneSignalChannel
 
         $result = Http::timeout($this->timeout)
             ->asJson()->acceptJson()
-            ->post($this->endPoint, [
+            ->post(self::ENDPOINT, [
                 'app_id' => $this->appId,
                 'contents' => $message->getBody(),
                 'headings' => $message->getHeadings(),
@@ -53,7 +51,9 @@ class OneSignalChannel
                 'include_player_ids' => $userIds,
             ]);
 
-        $result->toException();
+        if ($requestException = $result->toException()) {
+            throw $requestException;
+        }
 
         $errors = $result->json('errors');
 
