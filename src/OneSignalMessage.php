@@ -10,12 +10,12 @@ class OneSignalMessage
 
     private ?array $data = null;
 
-    public static function create(string $body = ''): self
+    public static function create($body = ''): self
     {
         return new static($body);
     }
 
-    public function __construct(string $body = '')
+    public function __construct($body = '')
     {
         $this->setBody($body);
     }
