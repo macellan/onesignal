@@ -20,7 +20,7 @@ Add your OneSignal appId to your config/services.php:
 // config/services.php
 ...
     'onesignal' => [
-        'app_id' => env('ONESIGNAL_APP_ID'),
+        'app_id' => env('ONESIGNAL_APP_ID', ''),
     ],
 ...
 ```
