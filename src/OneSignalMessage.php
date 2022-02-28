@@ -15,9 +15,13 @@ class OneSignalMessage
         return new static($body);
     }
 
+    /**
+     * @param string|array $body
+     */
     public function __construct($body = '')
     {
         $this->setBody($body);
+        $this->setSubject(config('app.name'));
     }
 
     protected function arrayValue($value): array
@@ -28,7 +32,7 @@ class OneSignalMessage
     /**
      * Set the message body.
      *
-     * @param mixed $value
+     * @param string|array $value
      *
      * @return $this
      */
@@ -42,7 +46,7 @@ class OneSignalMessage
     /**
      * Set the message subject.
      *
-     * @param mixed $value
+     * @param string|array $value
      *
      * @return $this
      */

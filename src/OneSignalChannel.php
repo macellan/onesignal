@@ -43,8 +43,8 @@ class OneSignalChannel
             ->asJson()->acceptJson()
             ->post(self::ENDPOINT, [
                 'app_id' => $this->appId,
-                'contents' => $message->getBody(),
                 'headings' => $message->getHeadings(),
+                'contents' => $message->getBody(),
                 'data' => $message->getData(),
                 'include_player_ids' => is_array($userIds) ? $userIds : [$userIds],
             ]);

@@ -10,7 +10,6 @@ class OneSignalServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
-     * @noinspection PhpUndefinedFunctionInspection
      * @throws \Exception
      */
     public function boot()
