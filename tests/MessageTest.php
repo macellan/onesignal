@@ -52,7 +52,7 @@ class MessageTest extends TestCase
     {
         $body = 'body';
 
-        $appId = 'OtherAppId';
+        $appId = 'otherAppId';
 
         $message = OneSignalMessage::create($body)->setAppId($appId);
 

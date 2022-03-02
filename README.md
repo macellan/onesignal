@@ -55,7 +55,7 @@ You can change appId of a specific notification, just add the setAppId() method
    public function toOneSignal($notifiable)
     {
         return OneSignalMessage::create()
-            ->setAppId('Different AppId')
+            ->setAppId('Other AppId')
     }
 ```
 
