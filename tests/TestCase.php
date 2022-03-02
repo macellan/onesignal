@@ -10,7 +10,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        config(['services.onesignal.app_id' => $this->appId]);
+        config([
+            'services.onesignal.app_id' => $this->appId,
+        ]);
     }
 
     protected function getPackageProviders($app)

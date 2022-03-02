@@ -47,4 +47,16 @@ class MessageTest extends TestCase
         $this->assertEquals($subject, $message->getHeadings());
         $this->assertEquals($data, $message->getData());
     }
+
+    public function test_change_app_id()
+    {
+        $body = 'body';
+
+        $appId = 'other_app_id';
+
+        $message = OneSignalMessage::create($body)->setAppId($appId);
+
+        $this->assertEquals(['en' => $body], $message->getBody());
+        $this->assertEquals($appId, $message->getAppId());
+    }
 }

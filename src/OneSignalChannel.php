@@ -42,7 +42,7 @@ class OneSignalChannel
         $result = Http::timeout($this->timeout)
             ->asJson()->acceptJson()
             ->post(self::ENDPOINT, [
-                'app_id' => $this->appId,
+                'app_id' => $message->getAppId() ?? $this->appId,
                 'headings' => $message->getHeadings(),
                 'contents' => $message->getBody(),
                 'data' => $message->getData(),
