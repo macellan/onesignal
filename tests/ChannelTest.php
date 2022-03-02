@@ -78,7 +78,7 @@ class ChannelTest extends TestCase
         (new Notifiable)->notify(new TestOtherAppIdNotification());
 
         Http::assertSent(function (Request $request) {
-            return $request['app_id'] == 'otherAppId';
+            return $request['app_id'] == 'other_app_id';
         });
     }
 }
