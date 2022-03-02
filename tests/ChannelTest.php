@@ -6,6 +6,8 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 use Macellan\OneSignal\OneSignalChannel;
+use Macellan\OneSignal\Tests\Notifications\TestAppIdNotification;
+use Macellan\OneSignal\Tests\Notifications\TestNotification;
 
 class ChannelTest extends TestCase
 {
@@ -61,5 +63,24 @@ class ChannelTest extends TestCase
         $this->expectException(CouldNotSendNotification::class);
 
         (new Notifiable)->notify(new TestNotification());
+    }
+
+    public function test_change_app_id()
+    {
+        Http::fake([
+            'api/v1/notifications' => Http::response([
+                "id" => "931082f5-e442-42b1-a951-19e7e45dee39",
+                "recipients" => 1,
+                "external_id" => null,
+            ]),
+        ]);
+
+        $notification = new TestAppIdNotification();
+
+        (new Notifiable)->notify($notification);
+
+        Http::assertSent(function (Request $request) use ($notification) {
+            return $request['app_id'] == $notification->toOneSignalAppId();
+        });
     }
 }

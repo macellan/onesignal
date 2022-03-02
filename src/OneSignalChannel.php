@@ -30,6 +30,10 @@ class OneSignalChannel
      */
     public function send($notifiable, Notification $notification): ?object
     {
+        if (method_exists($notification, 'toOneSignalAppId')) {
+            $this->appId = $notification->toOneSignalAppId();
+        }
+
         $message = $notification->toOneSignal($notifiable);
         if (is_string($message)) {
             $message = new OneSignalMessage($message);

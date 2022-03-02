@@ -49,6 +49,15 @@ class AccountApproved extends Notification
 }
 ```
 
+You can change appId of a specific notification, just add the toOneSignalAppId() method
+
+```php
+public function toOneSignalAppId()
+{
+        return 'Your app id';
+}
+```
+
 In your notifiable model, make sure to include a routeNotificationForOneSignal() method.
 
 ```php
