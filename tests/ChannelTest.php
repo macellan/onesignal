@@ -6,7 +6,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 use Macellan\OneSignal\OneSignalChannel;
-use Macellan\OneSignal\Tests\Notifications\TestAppIdNotification;
+use Macellan\OneSignal\Tests\Notifications\TestOtherAppIdNotification;
 use Macellan\OneSignal\Tests\Notifications\TestNotification;
 
 class ChannelTest extends TestCase
@@ -75,10 +75,10 @@ class ChannelTest extends TestCase
             ]),
         ]);
 
-        (new Notifiable)->notify(new TestAppIdNotification());
+        (new Notifiable)->notify(new TestOtherAppIdNotification());
 
         Http::assertSent(function (Request $request) {
-            return $request['app_id'] == 'different_app_id';
+            return $request['app_id'] == 'otherAppId';
         });
     }
 }
