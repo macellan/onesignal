@@ -4,6 +4,8 @@ namespace Macellan\OneSignal;
 
 class OneSignalMessage
 {
+    private ?string $appId = null;
+
     private array $contents;
 
     private array $headings;
@@ -69,6 +71,22 @@ class OneSignalMessage
         $this->data = $value;
 
         return $this;
+    }
+
+    /**
+     * @param string $appId
+     * @return $this
+     */
+    public function setAppId(string $appId): self
+    {
+        $this->appId = $appId;
+
+        return $this;
+    }
+
+    public function getAppId(): ?string
+    {
+        return $this->appId;
     }
 
     public function getData(): ?array

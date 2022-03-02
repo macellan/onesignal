@@ -15,12 +15,8 @@ class TestAppIdNotification extends Notification
     public function toOneSignal($notifiable)
     {
         return OneSignalMessage::create()
+            ->setAppId('different_app_id')
             ->setSubject('Subject')
             ->setBody('Body');
-    }
-
-    public function toOneSignalAppId()
-    {
-        return 'test_change_app_id';
     }
 }

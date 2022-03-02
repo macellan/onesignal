@@ -8,6 +8,8 @@ class MessageTest extends TestCase
 {
     public function test_create()
     {
+        $appId = 'app_id';
+
         $body = 'body';
 
         $subject = 'Subject';
@@ -17,8 +19,9 @@ class MessageTest extends TestCase
             'tr' => 'Data',
         ];
 
-        $message = OneSignalMessage::create($body)->setSubject($subject)->setData($data);
+        $message = OneSignalMessage::create($body)->setAppId($appId)->setSubject($subject)->setData($data);
 
+        $this->assertEquals($appId, $message->getAppId());
         $this->assertEquals(['en' => $body], $message->getBody());
         $this->assertEquals(['en' => $subject], $message->getHeadings());
         $this->assertEquals($data, $message->getData());
@@ -26,6 +29,8 @@ class MessageTest extends TestCase
 
     public function test_create_multiple_lang()
     {
+        $appId = 'app_id';
+
         $body = [
             'en' => 'Body',
             'tr' => 'Body',
@@ -41,8 +46,9 @@ class MessageTest extends TestCase
             'tr' => 'Data',
         ];
 
-        $message = OneSignalMessage::create($body)->setSubject($subject)->setData($data);
+        $message = OneSignalMessage::create($body)->setAppId($appId)->setSubject($subject)->setData($data);
 
+        $this->assertEquals($appId, $message->getAppId());
         $this->assertEquals($body, $message->getBody());
         $this->assertEquals($subject, $message->getHeadings());
         $this->assertEquals($data, $message->getData());

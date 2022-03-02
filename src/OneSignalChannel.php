@@ -30,10 +30,6 @@ class OneSignalChannel
      */
     public function send($notifiable, Notification $notification): ?object
     {
-        if (method_exists($notification, 'toOneSignalAppId')) {
-            $this->appId = $notification->toOneSignalAppId();
-        }
-
         $message = $notification->toOneSignal($notifiable);
         if (is_string($message)) {
             $message = new OneSignalMessage($message);
@@ -46,7 +42,7 @@ class OneSignalChannel
         $result = Http::timeout($this->timeout)
             ->asJson()->acceptJson()
             ->post(self::ENDPOINT, [
-                'app_id' => $this->appId,
+                'app_id' => $message->getAppId() ?? $this->appId,
                 'headings' => $message->getHeadings(),
                 'contents' => $message->getBody(),
                 'data' => $message->getData(),

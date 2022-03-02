@@ -75,12 +75,10 @@ class ChannelTest extends TestCase
             ]),
         ]);
 
-        $notification = new TestAppIdNotification();
+        (new Notifiable)->notify(new TestAppIdNotification());
 
-        (new Notifiable)->notify($notification);
-
-        Http::assertSent(function (Request $request) use ($notification) {
-            return $request['app_id'] == $notification->toOneSignalAppId();
+        Http::assertSent(function (Request $request) {
+            return $request['app_id'] == 'different_app_id';
         });
     }
 }
