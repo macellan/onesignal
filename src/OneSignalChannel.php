@@ -56,7 +56,7 @@ class OneSignalChannel
         $errors = $result->json('errors');
 
         if (! empty($errors)) {
-            throw CouldNotSendNotification::withErrors($errors);
+            throw CouldNotSendNotification::withErrors($result->body());
         }
 
         return $result;
