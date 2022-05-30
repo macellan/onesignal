@@ -1,7 +1,6 @@
 # OneSignal Notifications Channel for Laravel  
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)
-[![Build Status](https://scrutinizer-ci.com/g/macellan/onesignal/badges/build.png?b=main)](https://scrutinizer-ci.com/g/macellan/onesignal/build-status/main)
 [![StyleCI](https://github.styleci.io/repos/463069750/shield?branch=main)](https://github.styleci.io/repos/463069750?branch=main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/macellan/onesignal/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/macellan/onesignal/?branch=main)
 [![Total Downloads](https://img.shields.io/packagist/dt/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)  
