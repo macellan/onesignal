@@ -10,6 +10,7 @@ class OneSignalServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
+     *
      * @throws \Exception
      */
     public function boot()

@@ -18,7 +18,7 @@ class OneSignalMessage
     }
 
     /**
-     * @param string|array $body
+     * @param  string|array  $body
      */
     public function __construct($body = '')
     {
@@ -34,8 +34,7 @@ class OneSignalMessage
     /**
      * Set the message body.
      *
-     * @param string|array $value
-     *
+     * @param  string|array  $value
      * @return $this
      */
     public function setBody($value): self
@@ -48,8 +47,7 @@ class OneSignalMessage
     /**
      * Set the message subject.
      *
-     * @param string|array $value
-     *
+     * @param  string|array  $value
      * @return $this
      */
     public function setSubject($value): self
@@ -62,8 +60,7 @@ class OneSignalMessage
     /**
      * Set additional data.
      *
-     * @param array $value
-     *
+     * @param  array  $value
      * @return $this
      */
     public function setData(array $value): self
@@ -74,7 +71,7 @@ class OneSignalMessage
     }
 
     /**
-     * @param string $appId
+     * @param  string  $appId
      * @return $this
      */
     public function setAppId(string $appId): self
