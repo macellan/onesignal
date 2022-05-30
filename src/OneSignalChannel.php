@@ -22,10 +22,10 @@ class OneSignalChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param Notification $notification
-     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      * @return object|null
+     *
      * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException
      */
     public function send($notifiable, Notification $notification): ?object
