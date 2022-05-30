@@ -1,11 +1,10 @@
 # OneSignal Notifications Channel for Laravel  
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/macellan/onesignal/main.svg?style=flat-square)](https://travis-ci.org/macellan/onesignal)
+[![Build Status](https://scrutinizer-ci.com/g/macellan/onesignal/badges/build.png?b=main)](https://scrutinizer-ci.com/g/macellan/onesignal/build-status/main)
 [![StyleCI](https://github.styleci.io/repos/463069750/shield?branch=main)](https://github.styleci.io/repos/463069750?branch=main)
-[![Quality Score](https://img.shields.io/scrutinizer/g/macellan/onesignal.svg?style=flat-square)](https://scrutinizer-ci.com/g/macellan/onesignal)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/macellan/onesignal/main.svg?style=flat-square)](https://scrutinizer-ci.com/g/macellan/onesignal/?branch=main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/macellan/onesignal/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/macellan/onesignal/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/macellan/onesignal/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/macellan/onesignal/?branch=main)
 [![Total Downloads](https://img.shields.io/packagist/dt/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)  
 
 
