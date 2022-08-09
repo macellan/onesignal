@@ -10,7 +10,7 @@ class OneSignalChannel
 {
     protected string $appId;
 
-    protected int $timeout = 3;
+    protected int $timeout = 10;
 
     const ENDPOINT = 'https://onesignal.com/api/v1/notifications';
 
@@ -22,14 +22,18 @@ class OneSignalChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param Notification $notification
-     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      * @return object|null
+     *
      * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException
      */
     public function send($notifiable, Notification $notification): ?object
     {
+        /**
+         * @noinspection PhpPossiblePolymorphicInvocationInspection
+         * @scrutinizer ignore-call
+         */
         $message = $notification->toOneSignal($notifiable);
         if (is_string($message)) {
             $message = new OneSignalMessage($message);
@@ -56,7 +60,7 @@ class OneSignalChannel
         $errors = $result->json('errors');
 
         if (! empty($errors)) {
-            throw CouldNotSendNotification::withErrors($errors);
+            throw CouldNotSendNotification::withErrors($result->body());
         }
 
         return $result;

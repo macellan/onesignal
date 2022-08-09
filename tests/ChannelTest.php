@@ -6,8 +6,8 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 use Macellan\OneSignal\OneSignalChannel;
-use Macellan\OneSignal\Tests\Notifications\TestOtherAppIdNotification;
 use Macellan\OneSignal\Tests\Notifications\TestNotification;
+use Macellan\OneSignal\Tests\Notifications\TestOtherAppIdNotification;
 
 class ChannelTest extends TestCase
 {
@@ -15,9 +15,9 @@ class ChannelTest extends TestCase
     {
         Http::fake([
             'api/v1/notifications' => Http::response([
-                "id" => "931082f5-e442-42b1-a951-19e7e45dee39",
-                "recipients" => 1,
-                "external_id" => null,
+                'id' => '931082f5-e442-42b1-a951-19e7e45dee39',
+                'recipients' => 1,
+                'external_id' => null,
             ]),
         ]);
 
@@ -37,8 +37,8 @@ class ChannelTest extends TestCase
     {
         Http::fake([
             'api/v1/notifications' => Http::response([
-                "errors" => [
-                    'include_player_ids must be an array'
+                'errors' => [
+                    'include_player_ids must be an array',
                 ],
             ], 400),
         ]);
@@ -52,11 +52,11 @@ class ChannelTest extends TestCase
     {
         Http::fake([
             'api/v1/notifications' => Http::response([
-                "id" => "",
-                "recipients" => 0,
-                "errors" => [
-                    "All included players are not subscribed"
-                ]
+                'id' => '',
+                'recipients' => 0,
+                'errors' => [
+                    'All included players are not subscribed',
+                ],
             ]),
         ]);
 
@@ -69,9 +69,9 @@ class ChannelTest extends TestCase
     {
         Http::fake([
             'api/v1/notifications' => Http::response([
-                "id" => "931082f5-e442-42b1-a951-19e7e45dee39",
-                "recipients" => 1,
-                "external_id" => null,
+                'id' => '931082f5-e442-42b1-a951-19e7e45dee39',
+                'recipients' => 1,
+                'external_id' => null,
             ]),
         ]);
 
