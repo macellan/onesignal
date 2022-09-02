@@ -10,7 +10,7 @@ class OneSignalChannel
 {
     protected string $appId;
 
-    protected int $timeout = 10;
+    protected int $timeout = 0;
 
     const ENDPOINT = 'https://onesignal.com/api/v1/notifications';
 
