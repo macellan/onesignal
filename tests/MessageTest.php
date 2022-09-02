@@ -17,11 +17,17 @@ class MessageTest extends TestCase
             'tr' => 'Data',
         ];
 
-        $message = OneSignalMessage::create($body)->setSubject($subject)->setData($data);
+        $icon = 'test_icon.png';
+
+        $message = OneSignalMessage::create($body)
+            ->setSubject($subject)
+            ->setData($data)
+            ->setIcon($icon);
 
         $this->assertEquals(['en' => $body], $message->getBody());
         $this->assertEquals(['en' => $subject], $message->getHeadings());
         $this->assertEquals($data, $message->getData());
+        $this->assertEquals($icon, $message->getIcon());
     }
 
     public function test_create_multiple_lang()

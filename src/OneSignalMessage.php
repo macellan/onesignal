@@ -12,6 +12,8 @@ class OneSignalMessage
 
     private ?array $data = null;
 
+    private ?string $icon = null;
+
     public static function create($body = ''): self
     {
         return new static($body);
@@ -81,6 +83,13 @@ class OneSignalMessage
         return $this;
     }
 
+    public function setIcon(string $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
     public function getAppId(): ?string
     {
         return $this->appId;
@@ -99,5 +108,10 @@ class OneSignalMessage
     public function getBody(): array
     {
         return $this->contents;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
     }
 }
