@@ -5,7 +5,7 @@ namespace Macellan\OneSignal\Tests\Notifications;
 use Illuminate\Notifications\Notification;
 use Macellan\OneSignal\OneSignalMessage;
 
-class TestNotification extends Notification
+class TestIconNotification extends Notification
 {
     public function via()
     {
@@ -16,6 +16,7 @@ class TestNotification extends Notification
     {
         return OneSignalMessage::create()
             ->setSubject('Subject')
-            ->setBody('Body');
+            ->setBody('Body')
+            ->setIcon('test-icon.jpg');
     }
 }

@@ -50,7 +50,11 @@ class OneSignalChannel
                 'headings' => $message->getHeadings(),
                 'contents' => $message->getBody(),
                 'data' => $message->getData(),
+                'large_icon' => $message->getIcon(),
+                'huawei_large_icon' => $message->getIcon(),
+                'ios_attachments' => ['icon' => $message->getIcon()],
                 'include_player_ids' => is_array($userIds) ? $userIds : [$userIds],
+
             ]);
 
         if ($requestException = $result->toException()) {

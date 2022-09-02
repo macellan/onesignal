@@ -12,7 +12,7 @@ class TestOtherAppIdNotification extends Notification
         return ['onesignal'];
     }
 
-    public function toOneSignal($notifiable)
+    public function toOneSignal()
     {
         return OneSignalMessage::create()
             ->setAppId('other_app_id')

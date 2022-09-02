@@ -6,6 +6,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 use Macellan\OneSignal\OneSignalChannel;
+use Macellan\OneSignal\Tests\Notifications\TestIconNotification;
 use Macellan\OneSignal\Tests\Notifications\TestNotification;
 use Macellan\OneSignal\Tests\Notifications\TestOtherAppIdNotification;
 
@@ -79,6 +80,25 @@ class ChannelTest extends TestCase
 
         Http::assertSent(function (Request $request) {
             return $request['app_id'] == 'other_app_id';
+        });
+    }
+
+    public function test_icon()
+    {
+        Http::fake([
+            'api/v1/notifications' => Http::response([
+                'id' => '931082f5-e442-42b1-a951-19e7e45dee39',
+                'recipients' => 1,
+                'external_id' => null,
+            ]),
+        ]);
+
+        (new Notifiable)->notify(new TestIconNotification());
+
+        Http::assertSent(function (Request $request) {
+            return $request['huawei_large_icon'] == 'test-icon.jpg' &&
+                $request['large_icon'] == 'test-icon.jpg' &&
+                $request['ios_attachments'] == ['icon' => 'test-icon.jpg'];
         });
     }
 }
