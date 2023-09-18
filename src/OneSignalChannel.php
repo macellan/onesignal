@@ -50,6 +50,7 @@ class OneSignalChannel
                 'headings' => $message->getHeadings(),
                 'contents' => $message->getBody(),
                 'data' => $message->getData(),
+                'web_url' => $message->getWebUrl(),
                 'large_icon' => $message->getIcon(),
                 'huawei_large_icon' => $message->getIcon(),
                 'ios_attachments' => ['icon' => $message->getIcon()],

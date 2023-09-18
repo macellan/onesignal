@@ -6,9 +6,11 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 use Macellan\OneSignal\OneSignalChannel;
+use Macellan\OneSignal\OneSignalMessage;
 use Macellan\OneSignal\Tests\Notifications\TestIconNotification;
 use Macellan\OneSignal\Tests\Notifications\TestNotification;
 use Macellan\OneSignal\Tests\Notifications\TestOtherAppIdNotification;
+use Mockery\MockInterface;
 
 class ChannelTest extends TestCase
 {
@@ -99,6 +101,30 @@ class ChannelTest extends TestCase
             return $request['huawei_large_icon'] == 'test-icon.jpg' &&
                 $request['large_icon'] == 'test-icon.jpg' &&
                 $request['ios_attachments'] == ['icon' => 'test-icon.jpg'];
+        });
+    }
+
+    public function test_web_url(): void
+    {
+        Http::fake([
+            'api/v1/notifications' => Http::response([
+                'id' => '931082f5-e442-42b1-a951-19e7e45dee39',
+                'recipients' => 1,
+                'external_id' => null,
+            ]),
+        ]);
+
+        $webUrl = 'https://macellan.net/';
+        $notification = $this->partialMock(TestNotification::class, function (MockInterface $mock) use ($webUrl): void {
+            $mock->makePartial()
+                ->shouldReceive('toOneSignal')
+                ->andReturn((new OneSignalMessage())->setWebUrl($webUrl));
+        });
+
+        (new Notifiable)->notify($notification);
+
+        Http::assertSent(function (Request $request) use ($webUrl) {
+            return $request['web_url'] == $webUrl;
         });
     }
 }

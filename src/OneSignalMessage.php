@@ -14,6 +14,8 @@ class OneSignalMessage
 
     private ?string $icon = null;
 
+    private ?string $webUrl = null;
+
     public static function create($body = ''): self
     {
         return new static($body);
@@ -90,6 +92,13 @@ class OneSignalMessage
         return $this;
     }
 
+    public function setWebUrl(?string $webUrl = null): self
+    {
+        $this->webUrl = $webUrl;
+
+        return $this;
+    }
+
     public function getAppId(): ?string
     {
         return $this->appId;
@@ -113,5 +122,10 @@ class OneSignalMessage
     public function getIcon(): ?string
     {
         return $this->icon;
+    }
+
+    public function getWebUrl(): ?string
+    {
+        return $this->webUrl;
     }
 }
