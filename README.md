@@ -1,8 +1,8 @@
 # OneSignal Notifications Channel for Laravel  
 
-![Tests](https://github.com/macellan/onesignal/actions/workflows/tests.yml/badge.svg)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)
-[![Total Downloads](https://img.shields.io/packagist/dt/macellan/onesignal.svg?style=flat-square)](https://packagist.org/packages/macellan/onesignal)  
+![Tests](https://github.com/macellan/onesignal/workflows/Tests/badge.svg?branch=main)
+[![Latest Stable Version](https://poser.pugx.org/macellan/onesignal/v/stable)](https://packagist.org/packages/macellan/onesignal)
+[![Total Downloads](https://poser.pugx.org/macellan/onesignal/downloads)](https://packagist.org/packages/macellan/onesignal)
 
 
 This package makes it easy to send push notifications using [OneSignal](https://onesignal.com/) with Laravel 8.0 and 9.0, 10.0, 11.0  
