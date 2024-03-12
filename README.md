@@ -1,6 +1,6 @@
 # OneSignal Notifications Channel for Laravel  
 
-![Tests](https://github.com/macellan/onesignal/workflows/Tests/badge.svg?branch=main)
+![Tests](https://github.com/macellan/onesignal/actions/workflows/tests.yml/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/macellan/onesignal/v/stable)](https://packagist.org/packages/macellan/onesignal)
 [![Total Downloads](https://poser.pugx.org/macellan/onesignal/downloads)](https://packagist.org/packages/macellan/onesignal)
 
