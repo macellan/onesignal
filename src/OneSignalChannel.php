@@ -27,7 +27,7 @@ class OneSignalChannel
      *
      * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException|\Illuminate\Http\Client\ConnectionException
      */
-    public function send(mixed $notifiable, Notification $notification): void
+    public function send(mixed $notifiable, Notification $notification): ?object
     {
         /**
          * @noinspection PhpPossiblePolymorphicInvocationInspection
@@ -40,7 +40,7 @@ class OneSignalChannel
         }
 
         if (! $userIds = $notifiable->routeNotificationFor('OneSignal', $notification)) {
-            return;
+            return null;
         }
 
         $result = Http::timeout($this->timeout)
@@ -67,5 +67,7 @@ class OneSignalChannel
         if (! empty($errors)) {
             throw CouldNotSendNotification::withErrors($result->body());
         }
+
+        return $result;
     }
 }
