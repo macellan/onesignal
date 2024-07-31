@@ -6,6 +6,10 @@ namespace Macellan\OneSignal;
 
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Http;
+use Macellan\OneSignal\Events\OneSignalNotificationErrorsOccurred;
+use Macellan\OneSignal\Events\OneSignalNotificationNotSent;
+use Macellan\OneSignal\Events\OneSignalNotificationSending;
+use Macellan\OneSignal\Events\OneSignalNotificationSent;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
 
 class OneSignalChannel
@@ -27,7 +31,7 @@ class OneSignalChannel
      *
      * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException|\Illuminate\Http\Client\ConnectionException
      */
-    public function send(mixed $notifiable, Notification $notification): ?object
+    public function send(mixed $notifiable, Notification $notification): void
     {
         /**
          * @noinspection PhpPossiblePolymorphicInvocationInspection
@@ -40,8 +44,12 @@ class OneSignalChannel
         }
 
         if (! $userIds = $notifiable->routeNotificationFor('OneSignal', $notification)) {
-            return null;
+            OneSignalNotificationNotSent::dispatch($notifiable, $notification);
+
+            return;
         }
+
+        OneSignalNotificationSending::dispatch($notifiable, $notification);
 
         $result = Http::timeout($this->timeout)
             ->asJson()->acceptJson()
@@ -58,6 +66,8 @@ class OneSignalChannel
 
             ]);
 
+        OneSignalNotificationSent::dispatch($notifiable, $notification, $result->json());
+
         if ($requestException = $result->toException()) {
             throw $requestException;
         }
@@ -65,9 +75,9 @@ class OneSignalChannel
         $errors = $result->json('errors');
 
         if (! empty($errors)) {
+            OneSignalNotificationErrorsOccurred::dispatch($notifiable, $notification, $errors);
+
             throw CouldNotSendNotification::withErrors($result->body());
         }
-
-        return $result;
     }
 }
