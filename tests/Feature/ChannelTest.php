@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Macellan\OneSignal\Tests;
-
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Exceptions\CouldNotSendNotification;
