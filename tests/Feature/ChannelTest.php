@@ -12,8 +12,17 @@ use Macellan\OneSignal\OneSignalMessage;
 use Macellan\OneSignal\Tests\Fixtures\Notifiable;
 use Macellan\OneSignal\Tests\Fixtures\Notifications\TestIconNotification;
 use Macellan\OneSignal\Tests\Fixtures\Notifications\TestNotification;
+use Macellan\OneSignal\Tests\Fixtures\Notifications\TestNotificationByText;
 use Macellan\OneSignal\Tests\Fixtures\Notifications\TestOtherAppIdNotification;
+use Macellan\OneSignal\Tests\Fixtures\WrongNotifiable;
 use Mockery\MockInterface;
+
+test('throw exception when services.onesignal is not configured', function () {
+    config(['services.onesignal' => null]);
+
+    (new Notifiable)->notify(new TestNotification);
+
+})->throws(\RuntimeException::class, 'OneSignal configuration not found.');
 
 test('can send a notification', function () {
     Http::fake([
@@ -121,4 +130,30 @@ test('web url', function () {
     Http::assertSent(static function (Request $request) use ($webUrl) {
         return $request['web_url'] === $webUrl;
     });
+});
+
+test('text notification', function () {
+    Http::fake([
+        'api/v1/notifications' => Http::response([
+            'id' => '931082f5-e442-42b1-a951-19e7e45dee39',
+            'recipients' => 1,
+            'external_id' => null,
+        ]),
+    ]);
+
+    (new Notifiable)->notify(new TestNotificationByText);
+
+    Http::assertSent(static function (Request $request): bool {
+        return $request['contents'] === ['en' => 'My notification'];
+    });
+});
+
+test('user ids are empty', function () {
+    Http::fake([
+        'api/v1/notifications' => Http::response(),
+    ]);
+
+    (new WrongNotifiable)->notify(new TestNotificationByText);
+
+    Http::assertNothingSent();
 });
