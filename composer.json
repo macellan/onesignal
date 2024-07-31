@@ -46,9 +46,9 @@
     "test:types": "phpstan analyse --ansi",
     "test:pint": "pint --test",
     "test:pint:fix": "pint",
-    "test:unit": "vendor/bin/pest --parallel",
-    "test:coverage": "vendor/bin/pest --parallel --coverage-text --coverage-clover=coverage.clover",
-    "test:coverage:html": "vendor/bin/pest --parallel --coverage-html coverage",
+    "test:unit": "vendor/bin/pest",
+    "test:coverage": "vendor/bin/pest --coverage-text --coverage-clover=coverage.clover",
+    "test:coverage:html": "vendor/bin/pest --coverage-html coverage",
     "test:style": [
       "@test:pint:fix",
       "@test:phpcs",
