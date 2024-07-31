@@ -19,7 +19,6 @@ test('throw exception when services.onesignal is not configured', function () {
     config(['services.onesignal' => null]);
 
     (new Notifiable)->notify(new TestNotification);
-
 })->throws(\RuntimeException::class, 'OneSignal configuration not found.');
 
 test('can send a notification', function () {
