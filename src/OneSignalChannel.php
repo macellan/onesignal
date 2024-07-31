@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Macellan\OneSignal;
 
 use Illuminate\Notifications\Notification;
@@ -22,25 +24,23 @@ class OneSignalChannel
     /**
      * Send the given notification.
      *
-     * @param  mixed  $notifiable
-     * @param  Notification  $notification
-     * @return object|null
      *
-     * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException
+     * @throws CouldNotSendNotification|\Illuminate\Http\Client\RequestException|\Illuminate\Http\Client\ConnectionException
      */
-    public function send($notifiable, Notification $notification): ?object
+    public function send(mixed $notifiable, Notification $notification): void
     {
         /**
          * @noinspection PhpPossiblePolymorphicInvocationInspection
          * @scrutinizer ignore-call
          */
         $message = $notification->toOneSignal($notifiable);
+
         if (is_string($message)) {
             $message = new OneSignalMessage($message);
         }
 
         if (! $userIds = $notifiable->routeNotificationFor('OneSignal', $notification)) {
-            return null;
+            return;
         }
 
         $result = Http::timeout($this->timeout)
@@ -67,7 +67,5 @@ class OneSignalChannel
         if (! empty($errors)) {
             throw CouldNotSendNotification::withErrors($result->body());
         }
-
-        return $result;
     }
 }
