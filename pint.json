@@ -1,0 +1,13 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "phpdoc_separation": false,
+        "nullable_type_declaration_for_default_null_value": {
+            "use_nullable_type_declaration": false
+        },
+        "php_unit_method_casing": {
+            "case": "snake_case"
+        }
+    },
+    "cache-file": "./build/pint.cache"
+}
