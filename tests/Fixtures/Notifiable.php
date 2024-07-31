@@ -1,6 +1,8 @@
 <?php
 
-namespace Macellan\OneSignal\Tests;
+declare(strict_types=1);
+
+namespace Macellan\OneSignal\Tests\Fixtures;
 
 class Notifiable
 {
