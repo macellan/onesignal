@@ -5,7 +5,7 @@
 [![Total Downloads](https://poser.pugx.org/macellan/onesignal/downloads)](https://packagist.org/packages/macellan/onesignal)
 
 
-This package makes it easy to send push notifications using [OneSignal](https://onesignal.com/) with Laravel 8.0 and 9.0, 10.0, 11.0  
+This package makes it easy to send push notifications using [OneSignal](https://onesignal.com/) with Laravel 9.0 and 10.0, 11.0  
 
 This plugin sends notifications only with OneSignal Player ID.
 
