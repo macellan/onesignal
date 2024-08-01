@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Macellan\OneSignal;
 
 class OneSignalMessage
@@ -16,32 +18,26 @@ class OneSignalMessage
 
     private ?string $webUrl = null;
 
-    public static function create($body = ''): self
+    public static function create(string|array $body = ''): static
     {
         return new static($body);
     }
 
-    /**
-     * @param  string|array  $body
-     */
-    public function __construct($body = '')
+    public function __construct(string|array $body = '')
     {
         $this->setBody($body);
         $this->setSubject(config('app.name'));
     }
 
-    protected function arrayValue($value): array
+    protected function arrayValue(string|array $value): array
     {
         return (is_array($value)) ? $value : ['en' => $value];
     }
 
     /**
      * Set the message body.
-     *
-     * @param  string|array  $value
-     * @return $this
      */
-    public function setBody($value): self
+    public function setBody(string|array $value): static
     {
         $this->contents = $this->arrayValue($value);
 
@@ -50,11 +46,8 @@ class OneSignalMessage
 
     /**
      * Set the message subject.
-     *
-     * @param  string|array  $value
-     * @return $this
      */
-    public function setSubject($value): self
+    public function setSubject(string|array $value): static
     {
         $this->headings = $this->arrayValue($value);
 
@@ -63,36 +56,29 @@ class OneSignalMessage
 
     /**
      * Set additional data.
-     *
-     * @param  array  $value
-     * @return $this
      */
-    public function setData(array $value): self
+    public function setData(array $value): static
     {
         $this->data = $value;
 
         return $this;
     }
 
-    /**
-     * @param  string  $appId
-     * @return $this
-     */
-    public function setAppId(string $appId): self
+    public function setAppId(string $appId): static
     {
         $this->appId = $appId;
 
         return $this;
     }
 
-    public function setIcon(string $icon): self
+    public function setIcon(string $icon): static
     {
         $this->icon = $icon;
 
         return $this;
     }
 
-    public function setWebUrl(?string $webUrl = null): self
+    public function setWebUrl(string $webUrl = null): static
     {
         $this->webUrl = $webUrl;
 

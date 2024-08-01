@@ -7,8 +7,14 @@
         processIsolation="false"
         stopOnError="true"
         stopOnFailure="true"
-        xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
 >
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </coverage>
+
     <testsuites>
         <testsuite name="Laravel Onesignal Test Suite">
             <directory>tests</directory>
