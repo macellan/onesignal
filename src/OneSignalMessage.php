@@ -78,7 +78,7 @@ class OneSignalMessage
         return $this;
     }
 
-    public function setWebUrl(string $webUrl = null): static
+    public function setWebUrl(?string $webUrl = null): static
     {
         $this->webUrl = $webUrl;
 
