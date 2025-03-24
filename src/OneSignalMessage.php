@@ -18,9 +18,9 @@ class OneSignalMessage
 
     private ?string $webUrl = null;
 
-    public static function create(string|array $body = ''): static
+    public static function create(string|array $body = ''): OneSignalMessage
     {
-        return new static($body);
+        return new self($body);
     }
 
     public function __construct(string|array $body = '')

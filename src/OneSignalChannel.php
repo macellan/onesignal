@@ -33,10 +33,7 @@ class OneSignalChannel
      */
     public function send(mixed $notifiable, Notification $notification): void
     {
-        /**
-         * @noinspection PhpPossiblePolymorphicInvocationInspection
-         * @scrutinizer ignore-call
-         */
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         $message = $notification->toOneSignal($notifiable);
 
         if (is_string($message)) {
