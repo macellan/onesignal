@@ -12,23 +12,21 @@
     }
   ],
   "require": {
-    "php": "^8.1",
+    "php": ">=8.2",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.2",
-    "illuminate/notifications": "^9.0|^10.0|^11.0",
-    "illuminate/support": "^9.0|^10.0|^11.0",
-    "illuminate/http": "^9.0|^10.0|^11.0"
+    "illuminate/notifications": "^12.0",
+    "illuminate/support": "^12.0",
+    "illuminate/http": "^12.0"
   },
   "require-dev": {
-    "laravel/framework": "^9.0|^10.0|^11.0",
-    "larastan/larastan": "^2.9",
-    "laravel/pint": "^1.20",
-    "mockery/mockery": "^1.4.4",
-    "orchestra/testbench": "^7.1|^8.0|^9.0",
-    "pestphp/pest": "^1.23.1|^2.36.9",
-    "pestphp/pest-plugin-laravel": "^1.4.0|^2.4",
-    "roave/security-advisories": "dev-latest",
-    "squizlabs/php_codesniffer": "^3.11"
+    "larastan/larastan": "^v3.2",
+    "laravel/framework": "^12.0",
+    "laravel/pint": "^1.21",
+    "mockery/mockery": "^1.6.12",
+    "orchestra/testbench": "^10.0",
+    "pestphp/pest": "^v3.7.4",
+    "pestphp/pest-plugin-laravel": "^v3.1"
   },
   "autoload": {
     "psr-4": {
@@ -41,22 +39,18 @@
     }
   },
   "scripts": {
-    "test:phpcs": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
-    "test:phpcs:fix": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
-    "test:types": "phpstan analyse --ansi",
-    "test:pint": "pint --test",
-    "test:pint:fix": "pint",
-    "test:unit": "vendor/bin/pest",
-    "test:coverage": "vendor/bin/pest --coverage-text --coverage-clover=coverage.clover",
-    "test:coverage:html": "vendor/bin/pest --coverage-html coverage",
-    "test:style": [
-      "@test:pint:fix",
-      "@test:phpcs",
-      "@test:types"
-    ],
     "test": [
       "@test:style",
       "@test:unit"
+    ],
+    "test:unit": "vendor/bin/pest",
+    "test:coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage-text",
+    "test:coverage:html": "XDEBUG_MODE=coverage vendor/bin/pest --coverage-html coverage",
+    "analyse": "vendor/bin/phpstan analyse",
+    "format": "vendor/bin/pint",
+    "test:style": [
+      "@format",
+      "@analyse"
     ]
   },
   "extra": {
