@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Macellan\OneSignal;
 
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Macellan\OneSignal\Events\OneSignalNotificationErrorsOccurred;
 use Macellan\OneSignal\Events\OneSignalNotificationNotSent;
@@ -60,16 +62,20 @@ class OneSignalChannel
                 'huawei_large_icon' => $message->getIcon(),
                 'ios_attachments' => ['icon' => $message->getIcon()],
                 'include_player_ids' => is_array($userIds) ? $userIds : [$userIds],
-
             ]);
 
         OneSignalNotificationSent::dispatch($notifiable, $notification, $result->json());
 
+        $errors = $result->json('errors');
+
         if ($requestException = $result->toException()) {
+            Event::dispatch(new NotificationFailed($notifiable, $notification, 'onesignal', [
+                'errors' => $errors,
+                'response' => $result->body(),
+            ]));
+
             throw $requestException;
         }
-
-        $errors = $result->json('errors');
 
         if (! empty($errors)) {
             OneSignalNotificationErrorsOccurred::dispatch($notifiable, $notification, $errors);
