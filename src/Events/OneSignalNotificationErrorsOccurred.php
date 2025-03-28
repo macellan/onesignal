@@ -6,8 +6,10 @@ namespace Macellan\OneSignal\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Event;
 
 class OneSignalNotificationErrorsOccurred
 {
@@ -20,6 +22,8 @@ class OneSignalNotificationErrorsOccurred
         public Notification $notification,
         public array $errors,
     ) {
-        // .
+        Event::dispatch(new NotificationFailed($notifiable, $notification, 'onesignal', [
+            'errors' => $errors,
+        ]));
     }
 }
